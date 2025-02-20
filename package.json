@@ -7,10 +7,12 @@
     "lint": "bunx biome check --write ./src/*"
   },
   "dependencies": {
-    "elysia": "latest"
+    "elysia": "latest",
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
+    "@types/lodash-es": "^4.17.12",
     "bun-types": "latest"
   },
   "module": "src/index.js"
