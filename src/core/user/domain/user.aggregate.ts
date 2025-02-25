@@ -1,6 +1,7 @@
 import { AggregateRoot } from "../../shared/domain/aggregate.root";
 import type { ValueObject } from "../../shared/domain/value-object";
 import { Uuid } from "../../shared/domain/value-object/uuid.vo";
+import UserValidatorFactory from "./user-aggregate.validator";
 
 export type UserConstructorProps = {
   userId: UserId;
@@ -43,19 +44,29 @@ export class UserAggregate extends AggregateRoot {
       createdAt: new Date(),
     });
 
+    entity.validate();
+
     return entity;
+  }
+
+  private validate() {
+    const validator = UserValidatorFactory.create();
+    return validator.validate(this.notification, this);
   }
 
   changeName(name: string) {
     this.name = name;
+    this.validate();
   }
 
   changeEmail(email: string) {
     this.email = email;
+    this.validate();
   }
 
   changePassword(password: string) {
     this.password = password;
+    this.validate();
   }
 
   toJSON() {
